@@ -37,7 +37,7 @@ int Plugboard::load_input(const char *mapping_file) {
     }
   }
   if (mapping_count % 2 == 1) {
-    cerr << "INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS" << endl;
+    cerr << "Incorrect number of parameters in plugboard file plugboard.pb" << endl;
     return INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS;
   }
   return NO_ERROR;
@@ -160,7 +160,7 @@ int Rotor::load_input(const char *mapping_file, const char* init_pos_file) {
     for (int j = 0; j < mapping_count; j++) {
       if ((mapping[i] == mapping[j]) && (i != j)) {
 	cerr << "Invalid mapping of input " << j << " to output "
-	     << mapping[j] << " ( output " << mapping[j] 
+	     << mapping[j] << " (output " << mapping[j] 
 	     << " is already mapped to from input " << i 
 	     << ") in rotor file: " << mapping_file <<endl;
 	return INVALID_ROTOR_MAPPING;
