@@ -131,10 +131,10 @@ int Rotor::load_input(const char *mapping_file, const char* init_pos_file) {
   if (spec_input.is_open()) {
     //read the first 26 integers into the mapping array
     while((mapping_count < 26) && (spec_input >> mapping[mapping_count])) {
-      if (mapping[mapping_count] < 0 || mapping[mapping_count] > 25) {
+      /*if (mapping[mapping_count] < 0 || mapping[mapping_count] > 25) {
 	cerr << "INVALID_INDEX" << endl;
 	return INVALID_INDEX;
-      }
+      */
       mapping_count++;
     }
     //read remaining integers into notch array
@@ -153,13 +153,16 @@ int Rotor::load_input(const char *mapping_file, const char* init_pos_file) {
   }
 
   if (mapping_count != 26) {
-    cerr << "INVALID_ROTOR_MAPPING" <<endl;
+    cerr << "Not all inputs mapped in rotor file: " << mapping_file  << endl;
     return INVALID_ROTOR_MAPPING;
   }
   for (int i = 0; i < mapping_count; i++) {
     for (int j = 0; j < mapping_count; j++) {
       if ((mapping[i] == mapping[j]) && (i != j)) {
-	cerr << "Not all inputs mapped in rotor file: " << mapping_file  << endl;
+	cerr << "Invalid mapping of input " << j << " to output "
+	     << mapping[j] << " ( output " << mapping[j] 
+	     << " is already mapped to from input " << i 
+	     << ") in rotor file: " << mapping_file <<endl;
 	return INVALID_ROTOR_MAPPING;
       }
     }
