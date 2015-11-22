@@ -11,6 +11,11 @@ int main(int argc, char **argv) {
   for (int nArg = 0; nArg < argc; nArg++)
   cout << nArg << " " << argv[nArg] << endl;*/
 
+  if (argc < 4) {
+    cerr << "usage: enigma plugboard-file reflector-file (<rotor-file>* rotor-positions)?" << endl;
+    return INSUFFICIENT_NUMBER_OF_PARAMETERS;
+  }
+
   int load_failure = 0;
 
   Plugboard enigmaPlugboard;
