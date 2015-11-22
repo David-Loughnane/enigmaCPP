@@ -11,11 +11,19 @@ int main(int argc, char **argv) {
   for (int nArg = 0; nArg < argc; nArg++)
   cout << nArg << " " << argv[nArg] << endl;*/
 
+  int load_failure = 0;
+
   Plugboard enigmaPlugboard;
-  enigmaPlugboard.load_input(argv[1]);
+  load_failure = enigmaPlugboard.load_input(argv[1]);
+  if (load_failure) {
+    return load_failure;
+  }
 
   Reflector enigmaReflector;
   enigmaReflector.load_input(argv[2]);
+  if (load_failure) {
+    return load_failure;
+  }
 
   typedef Rotor** PtrRotorPtr;
   typedef Rotor* RotorPtr;
@@ -41,7 +49,10 @@ int main(int argc, char **argv) {
       rotors_index++;
     }
     for (int i = 0; i < rotors_index; i++) {
-      rotors_array[i]->load_input(argv[3 + i], argv[argc - 1]);
+      load_failure = rotors_array[i]->load_input(argv[3 + i], argv[argc - 1]);
+      if (load_failure) {
+	return load_failure;
+      }
     }
   }
 
