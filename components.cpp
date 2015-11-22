@@ -159,7 +159,7 @@ int Rotor::load_input(const char *mapping_file, const char* init_pos_file) {
   for (int i = 0; i < mapping_count; i++) {
     for (int j = 0; j < mapping_count; j++) {
       if ((mapping[i] == mapping[j]) && (i != j)) {
-	cerr << "INVALID_ROTOR_MAPPING" << endl;
+	cerr << "Not all inputs mapped in rotor file: " << mapping_file  << endl;
 	return INVALID_ROTOR_MAPPING;
       }
     }
