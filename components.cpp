@@ -40,6 +40,19 @@ int Plugboard::load_input(const char *mapping_file) {
     cerr << "Incorrect number of parameters in plugboard file plugboard.pb" << endl;
     return INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS;
   }
+
+  char test_char;
+  spec_input.open(mapping_file);
+  if (spec_input.is_open()) {
+    while (spec_input >> test_char) {
+      if (!isdigit(test_char)) {
+	cerr << "Non-numeric character in reflector file " << mapping_file << endl;
+	return NON_NUMERIC_CHARACTER;
+      }
+    }
+  }
+  spec_input.close();
+
   return NO_ERROR;
 }
 
@@ -95,6 +108,19 @@ int Reflector::load_input(const char *mapping_file) {
     cerr << "INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS" << endl;
     return INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS;
   }
+
+  char test_char;
+  spec_input.open(mapping_file);
+  if (spec_input.is_open()) {
+    while (spec_input >> test_char) {
+      if (!isdigit(test_char)) {
+	cerr << "Non-numeric character in reflector file " << mapping_file << endl;
+	return NON_NUMERIC_CHARACTER;
+      }
+    }
+  }
+  spec_input.close();
+
   return NO_ERROR;
 }
 
