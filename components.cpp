@@ -237,22 +237,17 @@ int Rotor::load_input(const char *mapping_file, const char* init_pos_file) {
   return NO_ERROR;
 }
 
-
 void Rotor::map_input(int &input_value) {
   input_value = relative_mapping[input_value];
-  /*
+}
+
+void Rotor::reverse_map_input(int &input_value) {
   for (int i = 0; i < MAX_ELEMENTS; i++) {
-    if (input_value == relative_mapping[i]) {
-      if ((i % 2) == 0) {
-	input_value = relative_mapping[i+1];
-      }
-      else {
-	input_value = relative_mapping[i-1];
-      }
+    if (relative_mapping[i] == input_value) {
+      input_value = i;
       break;
     }
   }
-  */
 }
 
 void Rotor::set_relative_mapping(){

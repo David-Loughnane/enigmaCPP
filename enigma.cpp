@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
   }
 
   /*TEST HEADER*/
-  /*  cout << setw(6) << "CHAR" << setw(6) << "INT";
+  /*cout << setw(6) << "CHAR" << setw(6) << "INT";
   cout << setw(6) << "PLUG";
 
   if (!no_rotors) {
@@ -79,72 +79,70 @@ int main(int argc, char **argv) {
     }
   }  
 
-  cout  << setw(6) << "PLUG";
+  cout << setw(6) << "PLUG";
   cout << setw(6) << "CHAR" << endl;*/
 
 
   char input_char, output_char;
   while (cin >> input_char) {
 
-    //    cout << setw(6) << input_char;
+    //cout << setw(6) << input_char;
     int input_int = input_char - 65;
     //cout << setw(6) << input_int;
 
-    /*for (int i = 0; i < rotors_array[0]->mapping_count; i++) {
+    /*    for (int i = 0; i < rotors_array[0]->mapping_count; i++) {
       cout << setw(3) << rotors_array[0]->relative_mapping[i] << " ";
     }
     cout << endl;*/
 
   if (!no_rotors) {    
     //cout << rotors_array[0]->relative_position << " ";
-    rotors_array[0]->relative_position++;
+    rotors_array[rotors_index - 1]->relative_position++;
     //cout << rotors_array[0]->relative_position << endl;
-    rotors_array[0]->set_relative_mapping();
+    rotors_array[rotors_index - 1]->set_relative_mapping();
   }
 
-    /*for (int i = 0; i < rotors_array[0]->mapping_count; i++ ){
-      cout << setw(3) << rotors_array[0]->relative_mapping[i] << " ";
-    }
-    cout << endl << endl;*/
+  /*for (int i = 0; i < rotors_array[0]->mapping_count; i++ ){
+    cout << setw(3) << rotors_array[0]->relative_mapping[i] << " ";
+  }
+  cout << endl << endl;*/
 
-    for (int i = 0; i < (rotors_index - 1); i++) {
-      for (int j = 0; j < rotors_array[i]->notch_count; j++) {
-	if (rotors_array[i]->relative_mapping[0] == rotors_array[i]->notches[j]) {
-	  rotors_array[i+1]->relative_position++;
-	  rotors_array[i+1]->set_relative_mapping();
-	}
+  for (int i = (rotors_index - 1); i > 0; i--) {
+    for (int j = 0; j < rotors_array[i]->notch_count; j++) {
+      if (rotors_array[i]->relative_mapping[0] == rotors_array[i]->notches[j]) {
+	rotors_array[i-1]->relative_position++;
+	rotors_array[i-1]->set_relative_mapping();
       }
     }
+  }
 
-    enigmaPlugboard.map_input(input_int);
-    //cout << setw(6) << input_int;
+  enigmaPlugboard.map_input(input_int);
+  //cout << setw(6) << input_int;
 
-    if (!no_rotors) {
-      for (int i = 0; i < rotors_index; i++) {
-	rotors_array[i]->map_input(input_int);
-	//cout << setw(6) << input_int;
-      }
+  if (!no_rotors) {
+    for (int i = (rotors_index - 1); i >= 0; i--) {
+      rotors_array[i]->map_input(input_int);
+      //cout << setw(6) << input_int;
     }
+  }
 
-    enigmaReflector.map_input(input_int);
-    //cout << setw(6) << input_int;
+  enigmaReflector.map_input(input_int);
+  //cout << setw(6) << input_int;
   
-    if (!no_rotors) {
-      for (int i = (rotors_index - 1); i >= 0; i--) {  
-	rotors_array[i]->map_input(input_int);
-	//cout << setw(6) << input_int;
-
-      }
+  if (!no_rotors) {
+    for (int i = 0; i < rotors_index; i++) {
+      rotors_array[i]->reverse_map_input(input_int);
+      //cout << setw(6) << input_int;
     }
+  }
     
-    enigmaPlugboard.map_input(input_int);
-    //cout << setw(6) << input_int;
+  enigmaPlugboard.map_input(input_int);
+  //cout << setw(6) << input_int;
 
 
-    output_char = input_int + 65;
-    //cout << setw(6) << output_char << endl;
-
-    cout << output_char;
+  output_char = input_int + 65;
+  //cout << setw(6) << output_char << endl;
+  cout << output_char;
   }
 
   //clean up dynamic memory, first each rotor in array, then array

@@ -28,6 +28,7 @@ public:
   Rotor();
   int load_input(const char *mapping_file, const char *init_pos_file);
   void map_input(int &input_value);
+  void reverse_map_input(int &input_value);
   static int rotor_count;
   const int rotor_id;
   //private:
