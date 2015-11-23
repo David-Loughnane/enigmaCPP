@@ -161,7 +161,6 @@ int Rotor::load_input(const char *mapping_file, const char* init_pos_file) {
 
   spec_input.open(mapping_file);
   if (spec_input.is_open()) {
-    //read the first 26 integers into the mapping array
     while((mapping_count < 26) && (spec_input >> mapping[mapping_count])) {
       /*if (mapping[mapping_count] < 0 || mapping[mapping_count] > 25) {
 	cerr << "INVALID_INDEX" << endl;

@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
       rotors_array[rotors_index] = rotor;
       rotors_index++;
     }
-    //laod Rotor configurations
+    //load Rotor configurations for each rotor
     for (int i = 0; i < rotors_index; i++) {
       load_failure = rotors_array[i]->load_input(argv[3 + i], argv[argc - 1]);
       if (load_failure) {
@@ -65,7 +65,6 @@ int main(int argc, char **argv) {
   }
 
   char input_char, output_char;
-  //input character, skip whitespace
   while (cin >> input_char) {
     if (input_char < 'A' || input_char > 'Z') {
       cerr << input_char << " is not a valid input character"
@@ -80,37 +79,36 @@ int main(int argc, char **argv) {
       rotors_array[rotors_index - 1]->set_relative_mapping();
     }
 
-  
-  for (int i = (rotors_index - 1); i >= 0; i--) {
-    for (int j = 0; j < rotors_array[i]->notch_count; j++) {
-      if ((rotors_array[i]->relative_position % 26) == rotors_array[i]->notches[j]) {
-	rotors_array[i-1]->relative_position++;
-	rotors_array[i-1]->set_relative_mapping();
+    for (int i = (rotors_index - 1); i >= 0; i--) {
+      for (int j = 0; j < rotors_array[i]->notch_count; j++) {
+	if ((rotors_array[i]->relative_position % 26) == rotors_array[i]->notches[j]) {
+	  rotors_array[i-1]->relative_position++;
+	  rotors_array[i-1]->set_relative_mapping();
+	}
       }
     }
-  }
 
-  enigmaPlugboard.map_input(input_int);
+    enigmaPlugboard.map_input(input_int);
 
-  if (!no_rotors) {
-    for (int i = (rotors_index - 1); i >= 0; i--) {
-      rotors_array[i]->map_input(input_int);
+    if (!no_rotors) {
+      for (int i = (rotors_index - 1); i >= 0; i--) {
+	rotors_array[i]->map_input(input_int);
+      }
     }
-  }
 
-  enigmaReflector.map_input(input_int);
-  
-  if (!no_rotors) {
-    for (int i = 0; i < rotors_index; i++) {
-      rotors_array[i]->reverse_map_input(input_int);
+    enigmaReflector.map_input(input_int);
+
+    if (!no_rotors) {
+      for (int i = 0; i < rotors_index; i++) {
+	rotors_array[i]->reverse_map_input(input_int);
+      }
     }
-  }
     
-  enigmaPlugboard.map_input(input_int);
-  
-  //final int value mapped to uppercase char
-  output_char = input_int + 65;
-  cout << output_char;
+    enigmaPlugboard.map_input(input_int);
+
+    //final int value mapped to uppercase char
+    output_char = input_int + 65;
+    cout << output_char;
   }
 
   //clean up dynamic memory, first each rotor in array, then array
