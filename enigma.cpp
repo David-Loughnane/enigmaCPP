@@ -88,7 +88,7 @@ int main(int argc, char **argv) {
   while (cin >> input_char) {
     if (input_char < 'A' || input_char > 'Z') {
       cerr << input_char << " is not a valid input character"
-      << " (input characters must be upper case letters (A-Z)!";
+      << " (input characters must be upper case letters A-Z)!";
       return INVALID_INPUT_CHARACTER;
     }
     //cout << setw(6) << input_char;
