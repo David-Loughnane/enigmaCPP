@@ -51,7 +51,6 @@ int main(int argc, char **argv) {
       RotorPtr rotor;
       rotor = new Rotor();
       rotors_array[rotors_index] = rotor;
-      //ut << "Rotors index " << rotors_index << endl;
       rotors_index++;
     }
     for (int i = 0; i < rotors_index; i++) {
@@ -59,6 +58,7 @@ int main(int argc, char **argv) {
       if (load_failure) {
 	return load_failure;
       }
+      rotors_array[i]->set_relative_mapping();
     }
   }
 
@@ -95,22 +95,30 @@ int main(int argc, char **argv) {
     int input_int = input_char - 65;
     //cout << setw(6) << input_int;
 
-    /*    for (int i = 0; i < rotors_array[0]->mapping_count; i++) {
-      cout << setw(3) << rotors_array[0]->relative_mapping[i] << " ";
+    /*for (int i = (rotors_index - 1); i >= 0; i--) {
+      cout << "rotor number " << i << endl;
+      for (int j = 0; j < rotors_array[i]->mapping_count; j++) {
+	cout << setw(3) << rotors_array[i]->relative_mapping[j] << " ";
+      }
+      cout << endl;
     }
     cout << endl;*/
 
-  if (!no_rotors) {    
+    if (!no_rotors) {
     //cout << rotors_array[0]->relative_position << " ";
-    rotors_array[rotors_index - 1]->relative_position++;
+      rotors_array[rotors_index - 1]->relative_position++;
     //cout << rotors_array[0]->relative_position << endl;
-    rotors_array[rotors_index - 1]->set_relative_mapping();
-  }
+      rotors_array[rotors_index - 1]->set_relative_mapping();
+    }
 
-  /*for (int i = 0; i < rotors_array[0]->mapping_count; i++ ){
-    cout << setw(3) << rotors_array[0]->relative_mapping[i] << " ";
+    /*for (int i = (rotors_index - 1); i >= 0; i--) {
+    cout << "rotor number " << i << endl;
+    for (int j = 0; j < rotors_array[i]->mapping_count; j++) {
+      cout << setw(3) << rotors_array[i]->relative_mapping[j] << " ";
+    }
+    cout << endl;
   }
-  cout << endl << endl;*/
+  cout << endl;*/
 
   for (int i = (rotors_index - 1); i >= 0; i--) {
     for (int j = 0; j < rotors_array[i]->notch_count; j++) {
