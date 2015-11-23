@@ -122,7 +122,8 @@ int main(int argc, char **argv) {
 
   for (int i = (rotors_index - 1); i >= 0; i--) {
     for (int j = 0; j < rotors_array[i]->notch_count; j++) {
-      if (rotors_array[i]->relative_mapping[0] == rotors_array[i]->notches[j]) {
+      if ((rotors_array[i]->relative_position % 26) == rotors_array[i]->notches[j]) {
+      //if (rotors_array[i]->relative_mapping[0] == rotors_array[i]->notches[j]) {
 	rotors_array[i-1]->relative_position++;
 	rotors_array[i-1]->set_relative_mapping();
       }
