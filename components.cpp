@@ -104,8 +104,8 @@ int Reflector::load_input(const char *mapping_file) {
       }
     }
   }
-  if (mapping_count != 26) {
-    cerr << "INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS" << endl;
+  if (mapping_count < 26) {
+    cerr << "Insufficient number of mappings in reflector file: " << mapping_file << endl;
     return INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS;
   }
 
@@ -210,7 +210,7 @@ int Rotor::load_input(const char *mapping_file, const char* init_pos_file) {
  start_input.open(init_pos_file);
   if (start_input.is_open()) {
     int temp = -99, input_counter = 0;
-    while(start_input >> temp) { //which one
+    while(start_input >> temp) {
       if (input_counter == rotor_id) {
 	start_position = temp;
 	relative_position = start_position;
@@ -233,7 +233,8 @@ int Rotor::load_input(const char *mapping_file, const char* init_pos_file) {
 
 
 void Rotor::map_input(int &input_value) {
-  //set_relative_mapping();
+  input_value = relative_mapping[input_value];
+  /*
   for (int i = 0; i < MAX_ELEMENTS; i++) {
     if (input_value == relative_mapping[i]) {
       if ((i % 2) == 0) {
@@ -245,6 +246,7 @@ void Rotor::map_input(int &input_value) {
       break;
     }
   }
+  */
 }
 
 void Rotor::set_relative_mapping(){
