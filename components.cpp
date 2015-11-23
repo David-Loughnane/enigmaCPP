@@ -37,7 +37,8 @@ int Plugboard::load_input(const char *mapping_file) {
     }
   }
   if (mapping_count % 2 == 1) {
-    cerr << "Incorrect number of parameters in plugboard file plugboard.pb" << endl;
+    cerr << "Incorrect number of parameters in plugboard file "
+	 << mapping_file  << endl;
     return INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS;
   }
 
@@ -105,6 +106,11 @@ int Reflector::load_input(const char *mapping_file) {
     }
   }
   if (mapping_count < 26) {
+    if (mapping_count % 2 == 1) {
+      cerr << "Incorrect (odd) number of parameters in reflector file "
+	   << mapping_file << endl;
+      return INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS;
+    }
     cerr << "Insufficient number of mappings in reflector file: " << mapping_file << endl;
     return INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS;
   }
