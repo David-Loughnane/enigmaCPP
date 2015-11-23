@@ -146,9 +146,6 @@ int main(int argc, char **argv) {
 
     cout << output_char;
   }
-  cout << endl;
-
-
 
   //clean up dynamic memory, first each rotor in array, then array
   if (!no_rotors) {
