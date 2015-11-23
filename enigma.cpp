@@ -51,6 +51,7 @@ int main(int argc, char **argv) {
       RotorPtr rotor;
       rotor = new Rotor();
       rotors_array[rotors_index] = rotor;
+      //ut << "Rotors index " << rotors_index << endl;
       rotors_index++;
     }
     for (int i = 0; i < rotors_index; i++) {
@@ -107,7 +108,7 @@ int main(int argc, char **argv) {
   }
   cout << endl << endl;*/
 
-  for (int i = (rotors_index - 1); i > 0; i--) {
+  for (int i = (rotors_index - 1); i >= 0; i--) {
     for (int j = 0; j < rotors_array[i]->notch_count; j++) {
       if (rotors_array[i]->relative_mapping[0] == rotors_array[i]->notches[j]) {
 	rotors_array[i-1]->relative_position++;
