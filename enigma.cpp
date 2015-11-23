@@ -93,6 +93,10 @@ int main(int argc, char **argv) {
     if (!no_rotors) {
       for (int i = (rotors_index - 1); i >= 0; i--) {
 	rotors_array[i]->map_input(input_int);
+	input_int = (input_int - rotors_array[i]->relative_position) % MAX_ELEMENTS;
+	if (input_int < 0) {
+	  input_int += MAX_ELEMENTS;
+	}
       }
     }
 
@@ -101,6 +105,10 @@ int main(int argc, char **argv) {
     if (!no_rotors) {
       for (int i = 0; i < rotors_index; i++) {
 	rotors_array[i]->reverse_map_input(input_int);
+	input_int = (input_int - rotors_array[i]->relative_position) % MAX_ELEMENTS;
+	if (input_int < 0) {
+	  input_int += MAX_ELEMENTS;
+	}
       }
     }
     
