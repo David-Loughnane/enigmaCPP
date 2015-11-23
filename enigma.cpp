@@ -95,10 +95,12 @@ int main(int argc, char **argv) {
     }
     cout << endl;*/
 
+  if (!no_rotors) {    
     //cout << rotors_array[0]->relative_position << " ";
     rotors_array[0]->relative_position++;
     //cout << rotors_array[0]->relative_position << endl;
     rotors_array[0]->set_relative_mapping();
+  }
 
     /*for (int i = 0; i < rotors_array[0]->mapping_count; i++ ){
       cout << setw(3) << rotors_array[0]->relative_mapping[i] << " ";
