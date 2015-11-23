@@ -25,7 +25,7 @@ int Plugboard::load_input(const char *mapping_file) {
     spec_input.close();
   }
   else if (spec_input.fail()) {
-    cerr << "ERROR_OPENING_CONFIGURATION_FILE" << endl;
+    cerr << "Error opening " << mapping_file << endl;
     return ERROR_OPENING_CONFIGURATION_FILE;
   }
   for (int i = 0; i < mapping_count; i++) {
@@ -47,7 +47,7 @@ int Plugboard::load_input(const char *mapping_file) {
   if (spec_input.is_open()) {
     while (spec_input >> test_char) {
       if (!isdigit(test_char)) {
-	cerr << "Non-numeric character in reflector file " << mapping_file << endl;
+	cerr << "Non-numeric character in plugboard file " << mapping_file << endl;
 	return NON_NUMERIC_CHARACTER;
       }
     }
@@ -94,7 +94,7 @@ int Reflector::load_input(const char *mapping_file) {
     spec_input.close();
   }
   else if (spec_input.fail()) {
-    cerr << "ERROR_OPENING_CONFIGURATION_FILE" << endl;
+    cerr << "Error opening " << mapping_file << endl;
     return ERROR_OPENING_CONFIGURATION_FILE;
   }
   for (int i = 0; i < mapping_count; i++) {
@@ -180,7 +180,7 @@ int Rotor::load_input(const char *mapping_file, const char* init_pos_file) {
     spec_input.close();
   }
   else if (spec_input.fail()) {
-    cerr << "ERROR_OPENING_CONFIGURATION_FILE" << endl;
+    cerr << "Error opening " << mapping_file << endl;
     return ERROR_OPENING_CONFIGURATION_FILE;
   }
 
@@ -230,7 +230,7 @@ int Rotor::load_input(const char *mapping_file, const char* init_pos_file) {
     spec_input.close();
   }
   else if (start_input.fail()) {
-    cerr << "ERROR_OPENING_CONFIGURATION_FILE" << endl;
+    cerr << "Error opening " << init_pos_file << endl;
     return ERROR_OPENING_CONFIGURATION_FILE;
   }
 
